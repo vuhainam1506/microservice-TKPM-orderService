@@ -1,0 +1,149 @@
+{
+    "info": {
+        "_postman_id": "b8a23e1f-5d2c-4e8a-9b8c-123456789abc",
+        "name": "Order Service",
+        "description": "Collection for testing Order Service endpoints",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Create New Order",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"customerId\": \"{{customerId}}\",\n    \"items\": [\n        {\n            \"productId\": \"{{productId1}}\",\n            \"quantity\": 2\n        },\n        {\n            \"productId\": \"{{productId2}}\",\n            \"quantity\": 1\n        }\n    ],\n    \"shippingAddress\": {\n        \"street\": \"123 Main St\",\n        \"city\": \"New York\",\n        \"state\": \"NY\",\n        \"zipCode\": \"10001\"\n    }\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3003/orders",
+                    "protocol": "http",
+                    "host": ["localhost"],
+                    "port": "3003",
+                    "path": ["orders"]
+                },
+                "description": "Create a new order with multiple items"
+            }
+        },
+        {
+            "name": "Get All Orders",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:3003/orders",
+                    "protocol": "http",
+                    "host": ["localhost"],
+                    "port": "3003",
+                    "path": ["orders"]
+                },
+                "description": "Retrieve all orders"
+            }
+        },
+        {
+            "name": "Get Order by ID",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:3003/orders/{{orderId}}",
+                    "protocol": "http",
+                    "host": ["localhost"],
+                    "port": "3003",
+                    "path": ["orders", "{{orderId}}"]
+                },
+                "description": "Get a specific order by ID"
+            }
+        },
+        {
+            "name": "Update Order Status",
+            "request": {
+                "method": "PATCH",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"status\": \"processing\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3003/orders/{{orderId}}/status",
+                    "protocol": "http",
+                    "host": ["localhost"],
+                    "port": "3003",
+                    "path": ["orders", "{{orderId}}", "status"]
+                },
+                "description": "Update the status of an existing order"
+            }
+        },
+        {
+            "name": "Get Orders by Customer",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:3003/orders/customer/{{customerId}}",
+                    "protocol": "http",
+                    "host": ["localhost"],
+                    "port": "3003",
+                    "path": ["orders", "customer", "{{customerId}}"]
+                },
+                "description": "Get all orders for a specific customer"
+            }
+        }
+    ],
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "customerId",
+            "value": "",
+            "type": "string",
+            "description": "ID of a valid customer"
+        },
+        {
+            "key": "productId1",
+            "value": "",
+            "type": "string",
+            "description": "ID of first product"
+        },
+        {
+            "key": "productId2",
+            "value": "",
+            "type": "string",
+            "description": "ID of second product"
+        },
+        {
+            "key": "orderId",
+            "value": "",
+            "type": "string",
+            "description": "ID of an existing order"
+        }
+    ]
+}

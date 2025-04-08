@@ -1,0 +1,33 @@
+services:
+  order-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3003"
+    environment:
+      - PORT=3003
+      - MONGO_URI=mongodb://order-db:27017/order_db
+    depends_on:
+      - order-db
+    networks:
+      - order-network
+
+  order-db:
+    image: mongo:latest
+    ports:
+      - "27020:27017"
+    environment:
+      - MONGODB_DATABASE=order_db
+    volumes:
+      - order-data:/data/db
+      - ./init-db:/docker-entrypoint-initdb.d
+    networks:
+      - order-network
+
+volumes:
+  order-data:
+
+networks:
+  order-network:
+    driver: bridge
